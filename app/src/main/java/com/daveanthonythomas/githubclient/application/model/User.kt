@@ -25,6 +25,11 @@ class User(val sharedPreferences: SharedPreferences) : UserState, UserTokenProvi
         sharedPreferences.edit().putString(userToken, token).apply()
         subject.onNext(this)
     }
+
+    fun removeToken() {
+        sharedPreferences.edit().remove(token)
+        subject.onNext(this)
+    }
 }
 
 interface UserState : ObservableProvider<UserState> {
